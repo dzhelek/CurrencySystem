@@ -6,20 +6,10 @@ using System.Threading.Tasks;
 
 namespace CurrencySystem.Models
 {
-    class Currency
+    interface ICurrency
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public decimal ExchangeRate { get; set; }
-        public Currency(string name, string code, decimal exchangeRate)
-        {
-            Name = name;
-            Code = code;
-            ExchangeRate = exchangeRate;
-        }
-        public override string ToString()
-        {
-            return $"{Name} ({Code}) - Exchange Rate: {ExchangeRate}";
-        }
+        public abstract static string Name { get; }
+        public abstract static string Code { get; }
+        public abstract static decimal ExchangeRateToEUR { get; }
     }
 }
