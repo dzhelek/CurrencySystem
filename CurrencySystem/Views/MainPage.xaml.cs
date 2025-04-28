@@ -1,4 +1,5 @@
 ﻿using CurrencySystem.Models;
+using CurrencySystem.ViewModels;
 using System.Diagnostics;
 
 namespace CurrencySystem
@@ -10,9 +11,13 @@ namespace CurrencySystem
         {
             InitializeComponent();
 
+            BindingContext = new ProductsViewModel();
+
             var m1 = new Money<BGN>(17.5m);
             var m2 = new Money<EUR>(25);
             var m3 = new Money<BGN>(10);
+
+            //var m8 = new Money<ICurrency>(15);
 
             var m4 = m1.ConvertTo<USD>();
             var m5 = new MultiCurrencyMoney();
@@ -26,6 +31,7 @@ namespace CurrencySystem
             Trace.WriteLine(m4);
             Trace.WriteLine(m7);
             Trace.WriteLine(m7.ConvertTo<USD>());
+
         }
 
         private void OnConvertButtonClicked(object sender, EventArgs e)
