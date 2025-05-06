@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CurrencySystem.Models
 {
-    class MultiCurrencyMoney
+    public class MultiCurrencyMoney
     {
         public decimal Amount { get; }
         public MultiCurrencyMoney(decimal amount=0)

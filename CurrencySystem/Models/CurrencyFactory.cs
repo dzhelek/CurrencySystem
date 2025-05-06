@@ -6,16 +6,27 @@ using System.Threading.Tasks;
 
 namespace CurrencySystem.Models
 {
-    class CurrencyFactory
+    public static class CurrencyFactory
     {
-        public static ICurrency CreateCurrency(string code)
+        public static IMoney CreateMoney(decimal amount, string currencyCode)
         {
-            return code switch
+            return currencyCode.ToUpper() switch
             {
-                "BGN" => new BGN(),
-                "USD" => new USD(),
-                "EUR" => new EUR(),
-                _ => throw new ArgumentException($"Invalid currency code: {code}")
+                "EUR" => new Money<EUR>(amount),
+                "USD" => new Money<USD>(amount),
+                "GBP" => new Money<GBP>(amount),
+                _ => throw new ArgumentException($"Unsupported currency code: {currencyCode}")
+            };
+        }
+
+        public static string GetCurrencySymbol(string currencyCode)
+        {
+            return currencyCode.ToUpper() switch
+            {
+                "EUR" => "€",
+                "USD" => "$",
+                "GBP" => "£",
+                _ => currencyCode
             };
         }
     }

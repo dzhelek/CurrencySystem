@@ -11,7 +11,7 @@ namespace CurrencySystem
         {
             InitializeComponent();
 
-            BindingContext = new ProductsViewModel();
+            BindingContext = new ProductsViewModel(App.ProductRepo);
 
             var m1 = new Money<BGN>(17.5m);
             var m2 = new Money<EUR>(25);

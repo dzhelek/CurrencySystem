@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CurrencySystem.Models
 {
-    interface ICurrency
+    public interface ICurrency
     {
         public abstract static string Name { get; }
         public abstract static string Code { get; }

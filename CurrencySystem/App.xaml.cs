@@ -14,7 +14,7 @@ namespace CurrencySystem
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            ProductRepo.Init().ContinueWith((s) => { } );
+            //ProductRepo.Init().ContinueWith((s) => { } );
 
             return new Window(new AppShell());
         }

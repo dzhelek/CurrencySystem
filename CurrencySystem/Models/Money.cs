@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace CurrencySystem.Models
 {
-    class Money<TCurrency> : IMoney where TCurrency : ICurrency
+    public class Money<TCurrency> : IMoney where TCurrency : ICurrency
     {
         private readonly decimal _amount;
+
+        internal decimal Amount => _amount;
 
         public Money(decimal amount)
         {
@@ -61,6 +63,21 @@ namespace CurrencySystem.Models
         public Money<TTargetCurrency> ConvertTo<TTargetCurrency>() where TTargetCurrency : ICurrency
         {
             return new Money<TTargetCurrency>(_amount * TCurrency.ExchangeRateToEUR / TTargetCurrency.ExchangeRateToEUR);
+        }
+
+        public string ToStorageString()
+        {
+            return $"{_amount}|{TCurrency.Code}";
+        }
+
+        public static Money<TCurrency> FromStorageString(string storageString)
+        {
+            var parts = storageString.Split('|');
+            if (parts.Length != 2 || !decimal.TryParse(parts[0], out decimal amount) || parts[1] != TCurrency.Code)
+            {
+                throw new ArgumentException($"Invalid storage string format or currency mismatch: {storageString}");
+            }
+            return new Money<TCurrency>(amount);
         }
 
         public override string ToString()

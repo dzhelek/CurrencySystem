@@ -6,25 +6,18 @@
              x:DataType="viewmodels:AddProductViewModel"
              Title="AddProductPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*,*" ColumnSpacing="5"
-          Padding="10">
-            <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3">
-                <TableRoot>
-                    <TableSection Title="Информация за продукта">
-                        <EntryCell Label="Part ID" Text="{Binding Id}" IsEnabled="False" />
-                        <EntryCell Label="Име" Text="{Binding Name}" />
-                        <EntryCell Label="Количество" Text="{Binding Quantity}" />
-                        <EntryCell Label="Цена" Text="{Binding Price}" />
-                        
-                    </TableSection>
-                </TableRoot>
-            </TableView>
+        
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto, *" ColumnSpacing="5" Padding="10">
+            <Label Grid.Row="0" Grid.Column="0" Text="Име" />
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Количество" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Quantity}" />
+            <Label Grid.Row="2" Grid.Column="0" Text="Цена" />
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Price}" />
+            <Label Grid.Row="3" Grid.Column="0" Text="Валута" />
+            <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding AvailableCurrencies}" SelectedItem="{Binding SelectedCurrency}" />
 
-            <Button Text="Save" Grid.Row="1" Grid.Column="0" Command="{Binding SaveDataCommand}" Margin="20,0"/>
+            <Button Text="Save" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding SaveProductCommand}"/>
 
         </Grid>
     </VerticalStackLayout>

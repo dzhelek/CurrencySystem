@@ -18,10 +18,7 @@
             </VerticalStackLayout.Background>
                 <Label Text="Currency System"
                    HorizontalOptions="Center" />
-                <Button
-                    Text="Add Product"
-                    Command="{Binding AddProductCommand}"
-                    HorizontalOptions="Center" />
+                
             </VerticalStackLayout>
         </Border>
         <Border
@@ -75,16 +72,29 @@
         <Border
                 Grid.Row="3" Grid.ColumnSpan="6"
                 >
-            <CollectionView>
+            <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
-                        <Grid>
+                        <VerticalStackLayout Padding="15,10" Margin="10,5,10,5">
                             <Label Text="{Binding Id}"/>
                             <Label Text="{Binding Name}"/>
-                        </Grid>
+                            <Label Text="{Binding Price}"/>
+                            <Label Text="{Binding Quantity}"/>
+                            <Label Text="{Binding Currency}"/>
+                        </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Button
+                    Text="Add Product"
+                    Command="{Binding AddProductCommand}"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
         </Border>
         <Border 
                 Grid.Row="4" Grid.ColumnSpan="6"
