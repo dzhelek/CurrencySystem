@@ -70,14 +70,10 @@ namespace CurrencySystem.Models
             return $"{_amount}|{TCurrency.Code}";
         }
 
-        public static Money<TCurrency> FromStorageString(string storageString)
+        public static IMoney FromStorageString(string storageString)
         {
             var parts = storageString.Split('|');
-            if (parts.Length != 2 || !decimal.TryParse(parts[0], out decimal amount) || parts[1] != TCurrency.Code)
-            {
-                throw new ArgumentException($"Invalid storage string format or currency mismatch: {storageString}");
-            }
-            return new Money<TCurrency>(amount);
+            return CurrencyFactory.CreateMoney(decimal.Parse(parts[0]), parts[1]);
         }
 
         public override string ToString()

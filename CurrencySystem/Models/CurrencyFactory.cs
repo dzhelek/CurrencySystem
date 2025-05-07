@@ -19,5 +19,11 @@ namespace CurrencySystem.Models
                 _ => throw new ArgumentException($"Unsupported currency code: {currencyCode}")
             };
         }
+
+        public static IMoney FromStorageString(string storageString)
+        {
+            var parts = storageString.Split('|');
+            return CurrencyFactory.CreateMoney(decimal.Parse(parts[0]), parts[1]);
+        }
     }
 }

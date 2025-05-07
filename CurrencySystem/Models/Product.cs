@@ -14,7 +14,6 @@ namespace CurrencySystem.Models
         [NotNull]
         [Column("MoneyValue")]
         public string StoredMoneyValue { get; set; } = "0|EUR";
-
         [Ignore]
         public IMoney MoneyPrice
         {
@@ -25,13 +24,7 @@ namespace CurrencySystem.Models
                     StoredMoneyValue = "0|EUR";
                 }
 
-                var parts = StoredMoneyValue.Split('|');
-                if (parts.Length != 2 || !decimal.TryParse(parts[0], out decimal amount))
-                {
-                    throw new ArgumentException($"Invalid money value format: {StoredMoneyValue}");
-                }
-
-                return CurrencyFactory.CreateMoney(amount, parts[1]);
+                return CurrencyFactory.FromStorageString(StoredMoneyValue);
             }
             set
             {
