@@ -72,20 +72,23 @@
         <Border
                 Grid.Row="3" Grid.ColumnSpan="6"
                 >
+            
             <VerticalStackLayout>
-            <CollectionView ItemsSource="{Binding Products}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
-                </CollectionView.ItemsLayout>
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto" Padding="10" ColumnSpacing="50">
+                    <Label Grid.Column="0" Text="Номер"/>
+                    <Label Grid.Column="1" Text="Име"/>
+                    <Label Grid.Column="2" Text="Количество"/>
+                    <Label Grid.Column="3" Text="Цена"/>
+                </Grid>
+            <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
-                        <VerticalStackLayout Padding="15,10" Margin="10,5,10,5">
-                            <Label Text="{Binding Id}"/>
-                            <Label Text="{Binding Name}"/>
-                            <Label Text="{Binding Price}"/>
-                            <Label Text="{Binding Quantity}"/>
-                            <Label Text="{Binding Currency}"/>
-                        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="*" Padding="10" ColumnSpacing="50">
+                            <Label Grid.Column="0" Text="{Binding Id, StringFormat='{0:D3}'}"/>
+                            <Label Grid.Column="1" Text="{Binding Name}"/>
+                            <Label Grid.Column="2" Text="{Binding Quantity, StringFormat='{0:F2} x '}"/>
+                            <Label Grid.Column="3" Text="{Binding MoneyPrice, StringFormat='{0:F2}'}"/>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
