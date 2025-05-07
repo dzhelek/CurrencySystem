@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:CurrencySystem.Models"
-             x:Class="CurrencySystem.MainPage">
+             xmlns:viewmodels="clr-namespace:CurrencySystem.ViewModels"
+             x:Class="CurrencySystem.MainPage"
+             x:DataType="viewmodels:ProductsViewModel">
 
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*,*,*,*">
         <Border
@@ -74,25 +76,33 @@
                 >
             
             <VerticalStackLayout>
-                <Grid ColumnDefinitions="Auto,*,Auto,Auto" Padding="10" ColumnSpacing="50">
-                    <Label Grid.Column="0" Text="Номер"/>
-                    <Label Grid.Column="1" Text="Име"/>
-                    <Label Grid.Column="2" Text="Количество"/>
-                    <Label Grid.Column="3" Text="Цена"/>
-                </Grid>
             <CollectionView ItemsSource="{Binding Products}" ItemsLayout="VerticalList">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" Padding="10" ColumnSpacing="50">
+                        <Label Grid.Column="0" Text="Номер"/>
+                        <Label Grid.Column="1" Text="Име"/>
+                        <Label Grid.Column="2" Text="Количество"/>
+                        <Label Grid.Column="3" Text="Цена"/>
+                        <Label Grid.Column="4" Text="Общо"/>
+                    </Grid>
+                </CollectionView.Header>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Product">
-                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="*" Padding="10" ColumnSpacing="50">
+                    <DataTemplate x:DataType="viewmodels:ProductViewModel">
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" Padding="10" ColumnSpacing="50">
                             <Label Grid.Column="0" Text="{Binding Id, StringFormat='{0:D3}'}"/>
                             <Label Grid.Column="1" Text="{Binding Name}"/>
                             <Label Grid.Column="2" Text="{Binding Quantity, StringFormat='{0:F2} x '}"/>
-                            <Label Grid.Column="3" Text="{Binding MoneyPrice, StringFormat='{0:F2}'}"/>
+                            <Label Grid.Column="3" Text="{Binding Price, StringFormat='{0:F2}'}"/>
+                            <Label Grid.Column="4" Text="{Binding FormattedTotal, StringFormat='{0:F2}'}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+    <Grid HorizontalOptions="End" ColumnDefinitions="Auto,Auto" Padding="5" ColumnSpacing="50">
+        <Label Text="Total Value:" FontAttributes="Bold"/>
+        <Label Text="{Binding TotalValue}" Grid.Column="1" FontAttributes="Bold"/>
+    </Grid>
             <Button
                     Text="Add Product"
                     Command="{Binding AddProductCommand}"
@@ -134,6 +144,9 @@
         <Border Grid.Row="9" Grid.ColumnSpan="6" Padding="10">
             <Label Text="Компютърна фактура, издадена с помощта на програмен продукт" HorizontalOptions="Center"/>
         </Border>
+    
+
     </Grid>
+
 
 </ContentPage>
