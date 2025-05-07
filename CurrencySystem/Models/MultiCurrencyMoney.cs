@@ -51,11 +51,5 @@ namespace CurrencySystem.Models
         {
             return $"{Amount}|{EUR.Code}";
         }
-
-        public IMoney FromStorageString(string storageString)
-        {
-            return new MultiCurrencyMoney(decimal.Parse(storageString.Split('|')[0]));
-        }
-
     }
 }
