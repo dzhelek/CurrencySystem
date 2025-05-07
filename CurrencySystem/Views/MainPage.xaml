@@ -89,11 +89,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels:ProductViewModel">
                         <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" Padding="10" ColumnSpacing="50">
-                            <Label Grid.Column="0" Text="{Binding Id, StringFormat='{0:D3}'}"/>
+                            <Label Grid.Column="0" Text="{Binding Id, StringFormat='{0:D2}'}"/>
                             <Label Grid.Column="1" Text="{Binding Name}"/>
-                            <Label Grid.Column="2" Text="{Binding Quantity, StringFormat='{0:F2} x '}"/>
-                            <Label Grid.Column="3" Text="{Binding Price, StringFormat='{0:F2}'}"/>
-                            <Label Grid.Column="4" Text="{Binding FormattedTotal, StringFormat='{0:F2}'}"/>
+                            <Label Grid.Column="2" Text="{Binding Quantity, StringFormat='{0} x '}"/>
+                            <Label Grid.Column="3" Text="{Binding Price}"/>
+                            <Label Grid.Column="4" Text="{Binding FormattedTotal}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

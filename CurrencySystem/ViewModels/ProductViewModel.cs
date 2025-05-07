@@ -22,23 +22,13 @@ namespace CurrencySystem.ViewModels
         private IMoney CalculateTotal()
         {
             var price = _product.MoneyPrice;
-            if (price is Money<EUR> eurMoney)
+            var parts = _product.StoredMoneyValue.Split('|');
+            if (parts.Length != 2 || !decimal.TryParse(parts[0], out decimal amount))
             {
-                return new Money<EUR>(eurMoney.Amount * _product.Quantity);
+                throw new ArgumentException($"Invalid money value format: {_product.StoredMoneyValue}");
             }
-            else if (price is Money<USD> usdMoney)
-            {
-                return new Money<USD>(usdMoney.Amount * _product.Quantity);
-            }
-            else if (price is Money<GBP> gbpMoney)
-            {
-                return new Money<GBP>(gbpMoney.Amount * _product.Quantity);
-            }
-            else if (price is MultiCurrencyMoney multiMoney)
-            {
-                return new MultiCurrencyMoney(multiMoney.Amount * _product.Quantity);
-            }
-            throw new ArgumentException($"Unsupported money type: {price.GetType()}");
+
+            return CurrencyFactory.CreateMoney(amount * _product.Quantity, parts[1]);
         }
     }
 } 

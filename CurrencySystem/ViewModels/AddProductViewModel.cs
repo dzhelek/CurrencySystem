@@ -37,13 +37,7 @@ namespace CurrencySystem.ViewModels
 
         private IMoney CreateMoneyFromInput()
         {
-            return SelectedCurrency switch
-            {
-                "EUR" => new Money<EUR>(Price),
-                "USD" => new Money<USD>(Price),
-                "GBP" => new Money<GBP>(Price),
-                _ => throw new ArgumentException($"Unsupported currency: {SelectedCurrency}")
-            };
+            return CurrencyFactory.CreateMoney(Price, SelectedCurrency);
         }
 
         [RelayCommand]

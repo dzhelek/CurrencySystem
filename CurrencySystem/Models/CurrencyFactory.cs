@@ -15,18 +15,8 @@ namespace CurrencySystem.Models
                 "EUR" => new Money<EUR>(amount),
                 "USD" => new Money<USD>(amount),
                 "GBP" => new Money<GBP>(amount),
+                "BGN" => new Money<BGN>(amount),
                 _ => throw new ArgumentException($"Unsupported currency code: {currencyCode}")
-            };
-        }
-
-        public static string GetCurrencySymbol(string currencyCode)
-        {
-            return currencyCode.ToUpper() switch
-            {
-                "EUR" => "€",
-                "USD" => "$",
-                "GBP" => "£",
-                _ => currencyCode
             };
         }
     }

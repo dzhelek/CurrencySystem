@@ -14,6 +14,16 @@ namespace CurrencySystem.Models
             Amount = amount;
         }
 
+        public static MultiCurrencyMoney operator +(MultiCurrencyMoney m1, IMoney m2)
+        {
+            if (m1 == null || m2 == null)
+                throw new ArgumentNullException("Money cannot be null");
+
+            var m2Eur = m2.ConvertTo<EUR>();
+
+            return m1 + m2Eur;
+        }
+
         public static MultiCurrencyMoney operator +(MultiCurrencyMoney m1, MultiCurrencyMoney m2)
         {
             if (m1 == null || m2 == null)

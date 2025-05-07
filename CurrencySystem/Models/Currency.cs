@@ -11,5 +11,6 @@ namespace CurrencySystem.Models
         public abstract static string Name { get; }
         public abstract static string Code { get; }
         public abstract static decimal ExchangeRateToEUR { get; }
+        public abstract static string Symbol { get; }
     }
 }

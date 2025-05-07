@@ -36,28 +36,12 @@ namespace CurrencySystem.ViewModels
 
         private void CalculateTotal()
         {
-            decimal totalInEur = 0;
+            var total = new MultiCurrencyMoney(0);
             foreach (var product in Products)
             {
-                var total = product.Total;
-                if (total is Money<EUR> eurMoney)
-                {
-                    totalInEur += eurMoney.Amount;
-                }
-                else if (total is Money<USD> usdMoney)
-                {
-                    totalInEur += usdMoney.ConvertTo<EUR>().Amount;
-                }
-                else if (total is Money<GBP> gbpMoney)
-                {
-                    totalInEur += gbpMoney.ConvertTo<EUR>().Amount;
-                }
-                else if (total is MultiCurrencyMoney multiMoney)
-                {
-                    totalInEur += multiMoney.Amount;
-                }
+                total += product.Total;
             }
-            TotalValue = new MultiCurrencyMoney(totalInEur);
+            TotalValue = total;
         }
 
         [RelayCommand]
