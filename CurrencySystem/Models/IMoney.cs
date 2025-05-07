@@ -9,5 +9,6 @@ namespace CurrencySystem.Models
     public interface IMoney
     {
         Money<TCurrency> ConvertTo<TCurrency>() where TCurrency : ICurrency;
+        string ToStorageString();
     }
 }

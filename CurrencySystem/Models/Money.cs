@@ -82,7 +82,7 @@ namespace CurrencySystem.Models
 
         public override string ToString()
         {
-            return $"{TCurrency.Code} {_amount:0.00}";
+            return $"{TCurrency.Symbol} {_amount:0.00}";
         }
     }
 }

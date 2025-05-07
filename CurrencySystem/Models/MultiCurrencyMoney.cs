@@ -44,7 +44,12 @@ namespace CurrencySystem.Models
 
         public override string ToString()
         {
-            return $"EUR {Amount}";
+            return $"{EUR.Symbol} {Amount}";
+        }
+
+        public string ToStorageString()
+        {
+            return $"{Amount}|{EUR.Code}";
         }
 
     }

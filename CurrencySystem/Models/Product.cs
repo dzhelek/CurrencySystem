@@ -38,32 +38,9 @@ namespace CurrencySystem.Models
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
 
-                if (value is Money<EUR> eurMoney)
-                {
-                    StoredMoneyValue = eurMoney.ToStorageString();
-                }
-                else if (value is Money<USD> usdMoney)
-                {
-                    StoredMoneyValue = usdMoney.ToStorageString();
-                }
-                else if (value is Money<GBP> gbpMoney)
-                {
-                    StoredMoneyValue = gbpMoney.ToStorageString();
-                }
-                else if (value is MultiCurrencyMoney multiMoney)
-                {
-                    StoredMoneyValue = $"{multiMoney.Amount}|EUR";
-                }
-                else
-                {
-                    throw new ArgumentException($"Unsupported money type: {value.GetType()}");
-                }
+                var storageString = value.ToStorageString();
+                StoredMoneyValue = storageString;
             }
-        }
-
-        public override string ToString()
-        {
-            return $"{Name} - {MoneyPrice} x {Quantity}";
         }
     }
 }
